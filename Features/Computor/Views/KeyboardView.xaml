@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:Calculator"
+    x:DataType="app:ComputorPageViewModel"
+    x:Class="Calculator.KeyboardView">
+
+    <Grid
+        ColumnSpacing="10"
+        RowSpacing="10"
+        ColumnDefinitions="60, 60, 60, 60"
+        RowDefinitions="60, 60, 60, 60, 60">
+        <Border
+            Style="{x:Static app:Styles.ButtonBorder}"
+            Grid.Column="0"
+            Grid.Row="0">
+            <ImageButton
+                Command="{Binding ToggleThemeCommand}"
+                CommandParameter="0"
+                Source="vector.png" />
+        </Border>
+        <ImageButton
+            Style="{x:Static app:Styles.OperatorButton}"
+            BackgroundColor="{Binding OperatorKey}"
+            Grid.Column="1"
+            Grid.Row="0"
+            Command="{Binding KeyCommand}"
+            CommandParameter="%"
+            Source="percent.png" />
+        <ImageButton
+            Style="{x:Static app:Styles.OperatorButton}"
+            BackgroundColor="{Binding OperatorKey}"
+            Grid.Column="2"
+            Grid.Row="0"
+            Command="{Binding KeyCommand}"
+            CommandParameter="÷"
+            Source="divide.png" />
+        <ImageButton
+            Style="{x:Static app:Styles.OperatorButton}"
+            BackgroundColor="{Binding OperatorKey}"
+            Grid.Column="3"
+            Grid.Row="0"
+            Command="{Binding KeyCommand}"
+            CommandParameter="×"
+            Source="multiple.png" />
+
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="0"
+            Grid.Row="1"
+            Command="{Binding KeyCommand}"
+            CommandParameter="7"
+            Text="7" />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Command="{Binding KeyCommand}"
+            CommandParameter="8"
+            Text="8" />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="2"
+            Grid.Row="1"
+            Command="{Binding KeyCommand}"
+            CommandParameter="9"
+            Text="9" />
+        <ImageButton
+            Style="{x:Static app:Styles.OperatorButton}"
+            BackgroundColor="{Binding OperatorKey}"
+            Grid.Column="3"
+            Grid.Row="1"
+            Command="{Binding KeyCommand}"
+            CommandParameter="-"
+            Source="minus.png" />
+
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="0"
+            Grid.Row="2"
+            Command="{Binding KeyCommand}"
+            CommandParameter="4"
+            Text="4" />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="1"
+            Grid.Row="2"
+            Command="{Binding KeyCommand}"
+            CommandParameter="5"
+            Text="5" />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="2"
+            Grid.Row="2"
+            Command="{Binding KeyCommand}"
+            CommandParameter="6"
+            Text="6" />
+        <ImageButton
+            Style="{x:Static app:Styles.OperatorButton}"
+            BackgroundColor="{Binding OperatorKey}"
+            Grid.Column="3"
+            Grid.Row="2"
+            Command="{Binding KeyCommand}"
+            CommandParameter="+"
+            Source="plus.png" />
+
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="0"
+            Grid.Row="3"
+            Command="{Binding KeyCommand}"
+            CommandParameter="1"
+            Text="1" />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="1"
+            Grid.Row="3"
+            Command="{Binding KeyCommand}"
+            CommandParameter="2"
+            Text="2" />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="2"
+            Grid.Row="3"
+            Command="{Binding KeyCommand}"
+            CommandParameter="3"
+            Text="3" />
+        <Button
+            Style="{x:Static app:Styles.CaculateButton}"
+            Shadow="{x:Static app:Styles.Shadow}"
+            TextColor="{Binding Text}"
+            Grid.Column="3"
+            Grid.Row="3"
+            Grid.RowSpan="2"
+            Command="{Binding CalculateCommand}"
+            Text="=" />
+
+        <Border
+            Style="{x:Static app:Styles.ButtonBorder}"
+            Stroke="Transparent"
+            Grid.Column="0"
+            Grid.Row="4">
+            <ImageButton
+                Command="{Binding ClearCommand}"
+                Source="ac.png" />
+        </Border>
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="1"
+            Grid.Row="4"
+            Command="{Binding KeyCommand}"
+            CommandParameter="."
+            Text="." />
+        <Button
+            Style="{x:Static app:Styles.NumberButton}"
+            TextColor="{Binding Text}"
+            BackgroundColor="{Binding KeyboardBackground}"
+            Grid.Column="2"
+            Grid.Row="4"
+            Command="{Binding KeyCommand}"
+            CommandParameter="0"
+            Text="0" />
+    </Grid>
+</ContentView>

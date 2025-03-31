@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Calculator"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="Calculator.StackedAreaChart">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Border
+                Style="{x:Static app:Styles.CornerBorder}"
+                BackgroundColor="{x:Static app:Colors.White}">
+                <Grid RowDefinitions="0.15*, *">
+                    <Label
+                        Grid.Row="0"
+                        FontSize="12"
+                        TextColor="{x:Static app:Colors.Black}"
+                        Text="Stats of Applications" />
+                    <chart:SfCartesianChart
+                        Grid.Row="1"
+                        Margin="0,16,0,0">
+                        <chart:SfCartesianChart.XAxes>
+                            <chart:CategoryAxis 
+                                ShowMajorGridLines="False"
+                                EdgeLabelsDrawingMode="Shift">
+                                <chart:CategoryAxis.MajorTickStyle>
+                                    <chart:ChartAxisTickStyle 
+                                        TickSize="5" 
+                                        Stroke="Transparent" />
+                                </chart:CategoryAxis.MajorTickStyle>
+                                <chart:CategoryAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle 
+                                        FontSize="8"
+                                        TextColor="{x:Static app:Colors.GreyText}" />
+                                </chart:CategoryAxis.LabelStyle>
+                                <chart:CategoryAxis.AxisLineStyle>
+                                    <chart:ChartLineStyle Stroke="Transparent"/>
+                                </chart:CategoryAxis.AxisLineStyle>
+                            </chart:CategoryAxis>
+                        </chart:SfCartesianChart.XAxes>
+
+                        <chart:SfCartesianChart.YAxes>
+                            <chart:NumericalAxis
+                                ShowMajorGridLines="False"
+                                EdgeLabelsDrawingMode="Fit"
+                                EdgeLabelsVisibilityMode="AlwaysVisible"
+                                Minimum="0.25" 
+                                Maximum="1"
+                                Interval="0.25">
+                                <chart:NumericalAxis.MajorTickStyle>
+                                    <chart:ChartAxisTickStyle 
+                                        TickSize="20" 
+                                        Stroke="Transparent" />
+                                </chart:NumericalAxis.MajorTickStyle>
+                                <chart:NumericalAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle 
+                                        LabelFormat="P0" 
+                                        FontSize="8"
+                                        TextColor="{x:Static app:Colors.GreyText}" />
+                                </chart:NumericalAxis.LabelStyle>
+                                <chart:NumericalAxis.AxisLineStyle>
+                                    <chart:ChartLineStyle Stroke="Transparent"/>
+                                </chart:NumericalAxis.AxisLineStyle>
+                            </chart:NumericalAxis>
+                        </chart:SfCartesianChart.YAxes>
+                        <chart:SplineAreaSeries 
+                                ItemsSource="{TemplateBinding Data}"
+                                EnableAnimation="True"
+                                XBindingPath="Time"
+                                YBindingPath="Percentage">
+
+                            <chart:SplineAreaSeries.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#9999FF" Offset="0.0" />
+                                    <GradientStop Color="#EEEEFF" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </chart:SplineAreaSeries.Fill>
+                        </chart:SplineAreaSeries>
+
+                        <chart:SfCartesianChart.PlotAreaBackgroundView>
+                            <BoxView Color="{x:Static app:Colors.BlueArea}" />
+                        </chart:SfCartesianChart.PlotAreaBackgroundView>
+                    </chart:SfCartesianChart>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

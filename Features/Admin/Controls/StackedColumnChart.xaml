@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Calculator"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="Calculator.StackedColumnChart">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Border
+                Style="{x:Static app:Styles.CornerBorder}"
+                Padding="32,16,32,32"
+                BackgroundColor="{x:Static app:Colors.White}">
+                <Grid RowDefinitions="0.15*, *, 0.1*">
+                    <FlexLayout
+                        Grid.Row="0"
+                        AlignItems="Center"
+                        JustifyContent="SpaceBetween">
+                        <Label
+                            FontSize="12"
+                            TextColor="{x:Static app:Colors.Black}"
+                            Text="Stats of Applications" />
+                        <app:DropdownControl x:DataType="app:AdminViewModel" Data="{Binding ComboboxWeeks}" />
+                    </FlexLayout>
+                    <chart:SfCartesianChart
+                        Grid.Row="1"
+                        Margin="0,22,0,22">
+                        <chart:SfCartesianChart.XAxes>
+                            <chart:CategoryAxis
+                                ShowMajorGridLines="False"
+                                EdgeLabelsDrawingMode="Center">
+                                <chart:CategoryAxis.MajorTickStyle>
+                                    <chart:ChartAxisTickStyle
+                                        TickSize="5"
+                                        Stroke="Transparent" />
+                                </chart:CategoryAxis.MajorTickStyle>
+                                <chart:CategoryAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle
+                                        FontSize="8"
+                                        TextColor="{x:Static app:Colors.GreyText}" />
+                                </chart:CategoryAxis.LabelStyle>
+                                <chart:CategoryAxis.AxisLineStyle>
+                                    <chart:ChartLineStyle Stroke="Transparent" />
+                                </chart:CategoryAxis.AxisLineStyle>
+                            </chart:CategoryAxis>
+                        </chart:SfCartesianChart.XAxes>
+
+                        <chart:SfCartesianChart.YAxes>
+                            <chart:NumericalAxis
+                                ShowMajorGridLines="True"
+                                ShowMinorGridLines="True"
+                                EdgeLabelsVisibilityMode="AlwaysVisible"
+                                EdgeLabelsDrawingMode="Shift"
+                                Minimum="0.2"
+                                Maximum="1"
+                                Interval="0.2">
+                                <chart:NumericalAxis.MajorTickStyle>
+                                    <chart:ChartAxisTickStyle
+                                        TickSize="10"
+                                        Stroke="Transparent" />
+                                </chart:NumericalAxis.MajorTickStyle>
+                                <chart:NumericalAxis.LabelStyle>
+                                    <chart:ChartAxisLabelStyle
+                                        LabelFormat="P0"
+                                        FontSize="8"
+                                        TextColor="{x:Static app:Colors.GreyText}" />
+                                </chart:NumericalAxis.LabelStyle>
+                                <chart:NumericalAxis.AxisLineStyle>
+                                    <chart:ChartLineStyle Stroke="Transparent" />
+                                </chart:NumericalAxis.AxisLineStyle>
+                                <chart:NumericalAxis.MajorGridLineStyle>
+                                    <chart:ChartLineStyle StrokeDashArray="16" />
+                                </chart:NumericalAxis.MajorGridLineStyle>
+                            </chart:NumericalAxis>
+                        </chart:SfCartesianChart.YAxes>
+
+                        <chart:StackingColumnSeries
+                            ItemsSource="{TemplateBinding Data}"
+                            XBindingPath="Day"
+                            Spacing="0.9"
+                            Fill="{x:Static app:Colors.Orange}"
+                            CornerRadius="0,0,5,5"
+                            YBindingPath="Rejected"
+                            EnableAnimation="True" />
+
+                        <chart:StackingColumnSeries
+                            ItemsSource="{TemplateBinding Data}"
+                            XBindingPath="Day"
+                            Spacing="0.9"
+                            Fill="{x:Static app:Colors.Yellow}"
+                            YBindingPath="Shortlisted"
+                            EnableAnimation="True" />
+
+                        <chart:StackingColumnSeries
+                            ItemsSource="{TemplateBinding Data}"
+                            XBindingPath="Day"
+                            Spacing="0.9"
+                            Fill="{x:Static app:Colors.Blue}"
+                            CornerRadius="5,5,0,0"
+                            YBindingPath="Applications"
+                            EnableAnimation="True" />
+                    </chart:SfCartesianChart>
+
+                    <FlexLayout AlignItems="Center" Grid.Row="2">
+                        <Label
+                            FontSize="10"
+                            TextColor="{x:Static app:Colors.Black}"
+                            Text="Applications" />
+                        <BoxView
+                            Margin="12,0,12,0"
+                            WidthRequest="10"
+                            HeightRequest="10"
+                            CornerRadius="5"
+                            BackgroundColor="{x:Static app:Colors.Blue}" />
+                        <Label
+                            FontSize="10"
+                            TextColor="{x:Static app:Colors.Black}"
+                            Text="Shortlisted" />
+                        <BoxView
+                            Margin="12,0,12,0"
+                            WidthRequest="10"
+                            HeightRequest="10"
+                            CornerRadius="5"
+                            BackgroundColor="{x:Static app:Colors.Yellow}" />
+                        <Label
+                            FontSize="10"
+                            TextColor="{x:Static app:Colors.Black}"
+                            Text="Rejected" />
+                        <BoxView
+                            Margin="12,0,12,0"
+                            WidthRequest="10"
+                            HeightRequest="10"
+                            CornerRadius="5"
+                            BackgroundColor="{x:Static app:Colors.Orange}" />
+                    </FlexLayout>
+                </Grid>
+
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

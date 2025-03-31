@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Calculator"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             x:Class="Calculator.DoughnutChart">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Border
+                Style="{x:Static app:Styles.CornerBorder}"
+                BackgroundColor="{x:Static app:Colors.White}">
+                <Grid
+                    RowDefinitions="0.15*, *">
+                    <Label
+                        FontSize="12"
+                        Grid.Row="0"
+                        TextColor="{x:Static app:Colors.Black}"
+                        Text="Ratio by Gender" />
+                    <Grid
+                        Grid.Row="1"
+                        ColumnDefinitions="0.3*, *, 0.3*">
+                        <FlexLayout
+                            Direction="Column"
+                            JustifyContent="End"
+                            AlignItems="Center"
+                            Grid.Column="0">
+                            <BoxView
+                                BackgroundColor="{x:Static app:Colors.Blue}"
+                                HeightRequest="40"
+                                WidthRequest="10"
+                                CornerRadius="10" />
+                            <Label TextColor="{x:Static app:Colors.Black}" Text="Male" />
+                        </FlexLayout>
+                        <FlexLayout
+                            Direction="Column"
+                            JustifyContent="End"
+                            AlignItems="Center"
+                            Grid.Column="2">
+                            <BoxView
+                                BackgroundColor="{x:Static app:Colors.Yellow}"
+                                HeightRequest="40"
+                                WidthRequest="10"
+                                CornerRadius="10" />
+                            <Label TextColor="{x:Static app:Colors.Black}" Text="Female" />
+                        </FlexLayout>
+                        <gauge:SfRadialGauge 
+                            Grid.Column="1"
+                            Margin="0,0,0,30"
+                            BackgroundColor="Transparent" 
+                            HeightRequest="130" 
+                            WidthRequest="130">
+                            <gauge:SfRadialGauge.Axes>
+                                <gauge:RadialAxis
+                                    EnableLoadingAnimation="True"
+                                    Interval="10"
+                                    StartAngle="270"
+                                    EndAngle="-90"
+                                    ShowTicks="False"
+                                    ShowLabels="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle 
+                                            Fill="{TemplateBinding ColorA}" 
+                                            Thickness="8" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer
+                                            Value="{TemplateBinding Data}"
+                                            PointerWidth="8"
+                                            EnableAnimation="True"
+                                            Fill="{TemplateBinding ColorB}"
+                                            CornerStyle="BothCurve" />
+                                    </gauge:RadialAxis.Pointers>
+
+                                    <gauge:RadialAxis.Annotations>
+                                        <gauge:GaugeAnnotation>
+                                            <gauge:GaugeAnnotation.Content>
+                                                <VerticalStackLayout HeightRequest="50" WidthRequest="50">
+                                                    <Border 
+                                                       BackgroundColor="{x:Static app:Colors.BlackLight}"
+                                                       Padding="10"
+                                                       StrokeThickness="0"
+                                                       StrokeShape="RoundRectangle 50">
+                                                        <Image Source="gender.png"/>
+                                                    </Border>
+                                                </VerticalStackLayout>
+                                            </gauge:GaugeAnnotation.Content>
+                                        </gauge:GaugeAnnotation>
+                                    </gauge:RadialAxis.Annotations>
+                                </gauge:RadialAxis>
+                            </gauge:SfRadialGauge.Axes>
+                        </gauge:SfRadialGauge>
+                    </Grid>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

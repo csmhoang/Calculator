@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Calculator"
+             x:DataType="app:AdminViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Calculator.DashboardView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:MathExpressionConverter x:Key="PercentageConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid
+        ColumnSpacing="32"
+        RowSpacing="32"
+        RowDefinitions="auto, auto, *, 0.6*"
+        ColumnDefinitions="*, *, *"
+        Padding="32">
+        <FlexLayout
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Margin="0, 0, 0, 60"
+            JustifyContent="SpaceBetween">
+            <Label
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="{x:Static app:Colors.Black}"
+                Text="Dashboard"
+                FlexLayout.Grow="6" />
+            <Border FlexLayout.Grow="4" Stroke="Transparent" StrokeShape="RoundRectangle 8">
+                <StackLayout BackgroundColor="{x:Static app:Colors.BlueInput}" Orientation="Horizontal"
+                             HorizontalOptions="FillAndExpand">
+                    <Entry
+                        TextColor="{x:Static app:Colors.Black}"
+                        BackgroundColor="{x:Static app:Colors.BlueInput}"
+                        HeightRequest="32"
+                        Placeholder="Search"
+                        PlaceholderColor="{x:Static app:Colors.White}"
+                        HorizontalOptions="FillAndExpand" />
+                    <Button
+                        BackgroundColor="{x:Static app:Colors.Blue}"
+                        HeightRequest="32"
+                        ImageSource="search.png" />
+                </StackLayout>
+            </Border>
+        </FlexLayout>
+
+        <app:CycleChart
+            Grid.Row="1"
+            Grid.Column="0"
+            Data="74"
+            Drop="{Binding ComboboxOptions}"
+            Color="{x:Static app:Colors.Blue}"
+            Title="Total Applications"
+            Count="5852"
+            Percent="+14% Inc" />
+
+        <app:CycleChart
+            Grid.Row="1"
+            Grid.Column="1"
+            Data="60"
+            Drop="{Binding ComboboxOptions}"
+            Color="{x:Static app:Colors.Yellow}"
+            Title="Shortlisted Candidates"
+            Count="3145"
+            Percent="+06% Inc" />
+
+        <app:CycleChart
+            Grid.Row="1"
+            Grid.Column="2"
+            Data="48"
+            Drop="{Binding ComboboxOptions}"
+            Color="{x:Static app:Colors.Orange}"
+            Title="Rejected Candidates"
+            Count="1035"
+            Percent="+04% Inc" />
+
+        <app:StackedColumnChart
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Data="{Binding StackedColumnSeries}"/>
+
+        <Border
+            Grid.Row="2"
+            Grid.Column="3"
+            Style="{x:Static app:Styles.CornerBorder}"
+            Padding="32,16,32,32"
+            BackgroundColor="{x:Static app:Colors.White}">
+            <Grid RowDefinitions="0.15*, *">
+                <FlexLayout
+                    Grid.Row="0"
+                    AlignItems="Center"
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        FontSize="12"
+                        TextColor="{x:Static app:Colors.Black}"
+                        Text="Acquisitions" />
+                    <app:DropdownControl Data="{Binding ComboboxMonths}" />
+                </FlexLayout>
+                <StackLayout Margin="0,20,0,0" Grid.Row="1">
+                    <VerticalStackLayout>
+                        <app:ProgressControl
+                            Name="Applications"
+                            Color="{x:Static app:Colors.Blue}"
+                            Progress="80" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            Color="{x:Static app:Colors.BlueLittle}" />
+                        <app:ProgressControl
+                            Name="Shortlisted"
+                            Color="{x:Static app:Colors.Yellow}"
+                            Progress="65" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            Color="{x:Static app:Colors.BlueLittle}" />
+                        <app:ProgressControl
+                            Name="Rejected"
+                            Color="{x:Static app:Colors.Orange}"
+                            Progress="40" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            Color="{x:Static app:Colors.BlueLittle}" />
+                        <app:ProgressControl
+                            Name="On Hold"
+                            Color="{x:Static app:Colors.BlueLittle}"
+                            Progress="50" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <BoxView
+                            HeightRequest="1"
+                            Color="{x:Static app:Colors.BlueLittle}" />
+                        <app:ProgressControl
+                            Name="Finalised"
+                            Color="{x:Static app:Colors.Green}"
+                            Progress="45" />
+                    </VerticalStackLayout>
+                </StackLayout>
+            </Grid>
+        </Border>
+
+        <app:StackedAreaChart
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Data="{Binding StackedAreaSeries}" />
+
+        <app:DoughnutChart
+            Grid.Row="3"
+            Grid.Column="2"
+            Data="60"
+            ColorA="{x:Static app:Colors.Blue}"
+            ColorB="{x:Static app:Colors.Yellow}" />
+    </Grid>
+</ContentView>

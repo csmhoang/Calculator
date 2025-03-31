@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Calculator.MenuView"
+    xmlns:app="clr-namespace:Calculator">
+
+    <StackLayout
+        Background="{x:Static app:Colors.Blue}"
+        Padding="32">
+        <Label
+            Style="{x:Static app:Styles.MenuCaptionLabel}"
+            Text="telentio" />
+        <StackLayout
+            Spacing="32"
+            x:DataType="app:AdminViewModel"
+            BindableLayout.ItemsSource="{Binding MenuItems}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate
+                    x:DataType="app:MenuItemModel">
+                    <HorizontalStackLayout>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding BindingContext.SelectMenuItemCommand, Source={RelativeSource AncestorType={x:Type app:AdminPage}}}"
+                                CommandParameter="{Binding Name}" />
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <Image
+                            Source="{Binding Icon}" />
+                        <Label
+                            Style="{x:Static app:Styles.NavigateLabel}"
+                            Text="{Binding Name}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+        <VerticalStackLayout
+            Spacing="24">
+            <Border
+                Style="{x:Static app:Styles.ProfileBorder}">
+                <Image
+                    Source="upgrade_illustration.png" />
+            </Border>
+            <Button
+                Style="{x:Static app:Styles.UpgradeButton}"
+                Text="Upgrade Now" />
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentView>

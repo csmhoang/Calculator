@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Calculator"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             x:Class="Calculator.CycleChart">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Border
+                Style="{x:Static app:Styles.CornerBorder}"
+                Padding="16"
+                BackgroundColor="{x:Static app:Colors.White}">
+                <StackLayout>
+                    <FlexLayout
+                        AlignItems="Center"
+                        JustifyContent="SpaceBetween">
+                        <Label
+                            FontSize="10"
+                            TextColor="{x:Static app:Colors.BlueDark}"
+                            Text="{TemplateBinding Title}" />
+                        <editors:SfComboBox
+                            ItemsSource="{TemplateBinding Drop}"
+                            Padding="0"
+                            WidthRequest="40"
+                            ShowBorder="False"
+                            MaxDropDownHeight="120"
+                            DropdownWidth="120"
+                            IsClearButtonVisible="False"
+                            IsEditable="False">
+                            <editors:SfComboBox.DropDownButtonSettings>
+                                <editors:DropDownButtonSettings>
+                                    <editors:DropDownButtonSettings.View>
+                                        <FlexLayout
+                                            AlignItems="Center"
+                                            JustifyContent="Center">
+                                            <Image Source="bar.png" />
+                                        </FlexLayout>
+                                    </editors:DropDownButtonSettings.View>
+                                </editors:DropDownButtonSettings>
+                            </editors:SfComboBox.DropDownButtonSettings>
+                        </editors:SfComboBox>
+                    </FlexLayout>
+
+                    <FlexLayout
+                        VerticalOptions="FillAndExpand"
+                        JustifyContent="SpaceBetween"
+                        AlignItems="Center">
+                        <Label
+                            TextColor="{x:Static app:Colors.Black}"
+                            FontSize="24"
+                            Text="{TemplateBinding Count}" />
+                        <gauge:SfRadialGauge
+                            Margin="0,30,16,30"
+                            BackgroundColor="Transparent"
+                            HeightRequest="90"
+                            WidthRequest="90">
+                            <gauge:SfRadialGauge.Axes>
+                                <gauge:RadialAxis
+                                    EnableLoadingAnimation="True"
+                                    Interval="10"
+                                    StartAngle="270"
+                                    EndAngle="-90"
+                                    ShowTicks="False"
+                                    ShowLabels="False">
+                                    <gauge:RadialAxis.AxisLineStyle>
+                                        <gauge:RadialLineStyle Thickness="10" />
+                                    </gauge:RadialAxis.AxisLineStyle>
+                                    <gauge:RadialAxis.Pointers>
+                                        <gauge:RangePointer
+                                            Value="{TemplateBinding Data}"
+                                            PointerWidth="10"
+                                            EnableAnimation="True"
+                                            Fill="{TemplateBinding Color}"
+                                            CornerStyle="BothCurve" />
+                                    </gauge:RadialAxis.Pointers>
+
+                                    <gauge:RadialAxis.Annotations>
+                                        <gauge:GaugeAnnotation>
+                                            <gauge:GaugeAnnotation.Content>
+                                                <VerticalStackLayout>
+                                                    <Label
+                                                        Text="{TemplateBinding Data, StringFormat='{0}%'}"
+                                                        FontSize="14"
+                                                        TextColor="{x:Static app:Colors.Black}"
+                                                        FontAttributes="Bold" />
+                                                </VerticalStackLayout>
+                                            </gauge:GaugeAnnotation.Content>
+                                        </gauge:GaugeAnnotation>
+                                    </gauge:RadialAxis.Annotations>
+                                </gauge:RadialAxis>
+                            </gauge:SfRadialGauge.Axes>
+                        </gauge:SfRadialGauge>
+
+                    </FlexLayout>
+                    <HorizontalStackLayout>
+                        <Image Source="arrow_up.png" />
+                        <Label
+                            FontSize="10"
+                            Margin="5"
+                            TextColor="{TemplateBinding Color}"
+                            Text="{TemplateBinding Percent}" />
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

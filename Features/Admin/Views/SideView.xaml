@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.SideView"
+             xmlns:app="clr-namespace:Calculator">
+    <Grid RowDefinitions="*, *">
+        <StackLayout
+            Padding="10,5,10,5"
+            BackgroundColor="{x:Static app:Colors.Blue}"
+            Grid.Row="0">
+            <HorizontalStackLayout 
+                Padding="32"
+                HorizontalOptions="End">
+                <Button BackgroundColor="Transparent" ImageSource="help.png" />
+                <Button BackgroundColor="Transparent" ImageSource="settings.png" />
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout>
+                <VerticalStackLayout HorizontalOptions="Center">
+                    <Border 
+                        Style="{x:Static app:Styles.ProfileBorder}"
+                        Margin="0, 0, 0, 40"
+                        StrokeThickness="2">
+                        <Image Source="profile_image.png" />
+                    </Border>
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="24" Text="Adam Jhones" />
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" Text="Head of HR" />
+                    <Label HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="14" Text="New York, USA" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </StackLayout>
+        <StackLayout
+            BackgroundColor="{x:Static app:Colors.BlueLight}"
+            Padding="32"
+            Grid.Row="1">
+            <FlexLayout JustifyContent="SpaceBetween">
+                <Label FontSize="24" Text="Notifications" />
+                <Button BackgroundColor="Transparent" ImageSource="carbon_notification_new.png" />
+            </FlexLayout>
+        </StackLayout>
+    </Grid>
+</ContentView>

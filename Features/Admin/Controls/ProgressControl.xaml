@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:app="clr-namespace:Calculator"
+             xmlns:progressBar="clr-namespace:Syncfusion.Maui.ProgressBar;assembly=Syncfusion.Maui.ProgressBar"
+             x:Class="Calculator.ProgressControl">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Grid
+                Padding="0,15,0,15"
+                ColumnSpacing="16"
+                ColumnDefinitions="auto, 0.6*, *, auto">
+                <BoxView
+                    Grid.Column="0"
+                    WidthRequest="10"
+                    HeightRequest="10"
+                    CornerRadius="5"
+                    VerticalOptions="Center"
+                    BackgroundColor="{TemplateBinding Color}" />
+                <Label
+                    Grid.Column="1"
+                    Text="{TemplateBinding Name}"
+                    VerticalOptions="Center"
+                    TextColor="{x:Static app:Colors.Black}" />
+                <progressBar:SfLinearProgressBar
+                    Grid.Column="2"
+                    VerticalOptions="Center"
+                    HeightRequest="6"
+                    ProgressCornerRadius="6"
+                    TrackCornerRadius="6"
+                    Progress="{TemplateBinding Progress}"
+                    TrackFill="{x:Static app:Colors.Light}"
+                    ProgressFill="{TemplateBinding Color}" />
+                <Label
+                    Grid.Column="3"
+                    VerticalOptions="Center"
+                    Text="{TemplateBinding Progress, StringFormat='{0}%'}"
+                    TextColor="{x:Static app:Colors.Black}" />
+            </Grid>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>
