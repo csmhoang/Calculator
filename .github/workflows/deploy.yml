@@ -32,11 +32,11 @@ jobs:
         working-directory: ./
 
       - name: Test
-        run: dotnet test -c Realease -f:net9.0-windows10.0.19041.0
+        run: dotnet test -c Release -f:net9.0-windows10.0.19041.0
         working-directory: ./
 
       - name: Publish
-        run: dotnet publish -c Realease -f:net9.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true
+        run: dotnet publish -c Release -f:net9.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true
         working-directory: ./
 
       - name: Upload
