@@ -33,11 +33,11 @@ jobs:
 
       - name: Decode Signing Certificate
         run: 
-          echo "${{ recrets.SIGNING_CERTIFICATE_BASE_64_CONTENT }}" > cert.asc
+          echo "${{ secrets.SIGNING_CERTIFICATE_BASE_64_CONTENT }}" > cert.asc
           certutil -decode cert.asc cert.pfx
 
       - name: Install Signing  Certificate
-        run: certutil -user -p ${{ recrets.SIGNING_CERTIFICATE_PASSWORD }} -Silent NoRoot -importpfx cert.pfx
+        run: certutil -user -p ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }} -Silent NoRoot -importpfx cert.pfx
 
       - name: Test
         run: dotnet test -c Release -f:net9.0-windows10.0.19041.0
@@ -50,7 +50,7 @@ jobs:
             /p:GenerateAppxPackageOnBuild=true `
             /p:WindowsPackageType=MSIX `
             /p:AppxPackageSigningEnabled=true `
-            /p:PackgageCertificateThumbprint=${{ recrets.SIGNING_CERTIFICATE_THUMBPRINT }}
+            /p:PackgageCertificateThumbprint=${{ secrets.SIGNING_CERTIFICATE_THUMBPRINT }}
         working-directory: ./
 
       - name: Upload
