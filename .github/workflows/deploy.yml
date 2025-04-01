@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: List directory structure (debug)
+        run: ls -R
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -21,21 +25,22 @@ jobs:
 
       - name: Restore
         run: dotnet restore
-        working-directory: ../Calcultor  
+        working-directory: Calcultor  
 
       - name: Build
         run: dotnet build -c Release -f:net9.0-windows10.0.19041.0
+        working-directory: Calcultor
 
       - name: Test
         run: dotnet test -c Realease -f:net9.0-windows10.0.19041.0
-        working-directory: ../Calcultor
+        working-directory: Calcultor
 
       - name: Publish
         run: dotnet publish -c Realease -f:net9.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true
-        working-directory: ../Calcultor
+        working-directory: Calcultor
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: Build
-          path: ../Calculator/bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.msix
+          path: Calculator/bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.msix
