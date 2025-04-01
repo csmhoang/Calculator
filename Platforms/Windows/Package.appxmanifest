@@ -6,7 +6,7 @@
         xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
         IgnorableNamespaces="uap rescap">
 
-    <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="0.0.0.0"/>
+    <Identity Name="maui-package-name-placeholder" Publisher="CN=SingletonSean" Version="0.0.0.0"/>
 
     <mp:PhoneIdentity PhoneProductId="8402A701-2A83-43D7-BD97-E2A4FAB090AE"
                       PhonePublisherId="00000000-0000-0000-0000-000000000000"/>

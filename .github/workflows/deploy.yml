@@ -31,16 +31,32 @@ jobs:
         run: dotnet build -c Release -f:net9.0-windows10.0.19041.0
         working-directory: ./
 
+      - name: Decode Signing Certificate
+        run: 
+          echo "${{ secrects.SIGNING_CERTIFICATE_BASE_64_CONTENT }}" > cert.asc
+          certutil -decode cert.asc cert.pfx
+
+      - name: Install Signing  Certificate
+        run: certutil -user -p ${{ secrects.SIGNING_CERTIFICATE_PASSWORD }} -Silent NoRoot -importpfx cert.pfx
+
       - name: Test
         run: dotnet test -c Release -f:net9.0-windows10.0.19041.0
         working-directory: ./
 
       - name: Publish
-        run: dotnet publish -c Release -f:net9.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true /p:WindowsPackageType=MSIX
+        run: |
+          dotnet publish -c Release `
+            -f:net9.0-windows10.0.19041.0 `
+            /p:GenerateAppxPackageOnBuild=true `
+            /p:WindowsPackageType=MSIX `
+            /p:AppxPackageSigningEnabled=true `
+            /p:PackgageCertificateThumbprint=${{ secrects.SIGNING_CERTIFICATE_THUMBPRINT }}
         working-directory: ./
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: Build
-          path: ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.msix
+          path: 
+            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.msix
+            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.cer
