@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+
+permissions:
+  contents: write
+  
 jobs:
   build:
     runs-on: windows-latest
@@ -39,10 +43,6 @@ jobs:
       - name: Install Signing  Certificate
         run: certutil -user -p ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }} -Silent -importpfx cert.pfx NoRoot
 
-      - name: Test
-        run: dotnet test -c Release -f:net9.0-windows10.0.19041.0
-        working-directory: ./
-
       - name: Publish
         run: |
           dotnet publish -c Release `
@@ -52,10 +52,34 @@ jobs:
             /p:PackgageCertificateThumbprint=${{ secrets.SIGNING_CERTIFICATE_THUMBPRINT }}
         working-directory: ./
 
-      - name: Upload
-        uses: actions/upload-artifact@v4
+      - name: Extract Version
+        id: extractVersion
+        shell: pwsh
+        run: |
+          $xml = [xml](Get-Content -Path ./Calculator.csproj)
+          [string]$version = [Version] $xml.Project.PropertyGroup.ApplicationDisplayVersion
+          echo "version=${$version}" >> $env:GITHUB_OUTPUT
+
+      - name: Create Tag
+        uses: actions/github-script@v5
+        with: 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              ref: 'refs/tags/v' + '${{ steps.extractVersion.outputs.version }}'
+            })
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: Build
-          path: 
-            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.msix
-            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/**/*.cer
+          tag_name: v${{ steps.extractVersion.outputs.version }}
+          files: ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.msix
+          files: ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.cer
+          body: |
+            ## Release Notes
+            - Version: ${{ steps.extractVersion.outputs.version }}
+            - Build Date: ${{ github.run_date }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
