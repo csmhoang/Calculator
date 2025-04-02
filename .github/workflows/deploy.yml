@@ -50,6 +50,7 @@ jobs:
             /p:GenerateAppxPackageOnBuild=true `
             /p:AppxPackageSigningEnabled=true `
             /p:PackgageCertificateThumbprint=${{ secrets.SIGNING_CERTIFICATE_THUMBPRINT }}
+            /p:WindowsPackageType=MSIX `
         working-directory: ./
 
       - name: Extract Version
