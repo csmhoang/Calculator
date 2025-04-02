@@ -86,8 +86,8 @@ jobs:
         with:
           tag_name: v${{ steps.extractVersion.outputs.version }}
           files: |
-            ./bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/Calculator_${{ steps.extractVersion.outputs.version }}.0_Test/AutoUpdate.msix
-            ./bin/Release/net8.0-windows10.0.19041.0/win10-x64/AppPackages/Calculator_${{ steps.extractVersion.outputs.version }}.0_Test/ContinuousDeployment.cer
+            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Calculator_${{ steps.extractVersion.outputs.version }}.0_Test/AutoUpdate.msix
+            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Calculator_${{ steps.extractVersion.outputs.version }}.0_Test/ContinuousDeployment.cer
           body: |
             ## Release Notes
             - Version: ${{ steps.extractVersion.outputs.version }}
