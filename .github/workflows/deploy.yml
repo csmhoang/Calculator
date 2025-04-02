@@ -75,8 +75,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.extractVersion.outputs.version }}
-          files: ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.msix
-          files: ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.cer
+          files: 
+            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.msix
+            ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.cer
           body: |
             ## Release Notes
             - Version: ${{ steps.extractVersion.outputs.version }}
