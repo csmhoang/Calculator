@@ -60,7 +60,6 @@ jobs:
           $xml = [xml](Get-Content -Path ./Calculator.csproj)
           [string]$version = [Version] $xml.Project.PropertyGroup.ApplicationDisplayVersion
           echo "version=${$version}" >> $env:GITHUB_OUTPUT
-
       - name: Create Tag
         uses: actions/github-script@v5
         with: 
@@ -76,7 +75,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.extractVersion.outputs.version }}
-          files: 
+          files: |
             ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.msix
             ./bin/Release/net9.0-windows10.0.19041.0/win10-x64/AppPackages/Caculator_${{ steps.extractVersion.outputs.version }}.0_Test/Caculator_${{ steps.extractVersion.outputs.version }}.0_x64.cer
           body: |
